@@ -6,7 +6,8 @@ import { DatePipe } from '@angular/common';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppService } from './app.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { CompleterService, LocalData, RemoteData } from 'ng-mdb-pro/pro/autocomplete';
+import { MDBBootstrapModules } from 'ng-mdb-pro';
+//import { CompleterService, LocalData, RemoteData } from 'ng-mdb-pro/pro/autocomplete';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -17,7 +18,8 @@ describe('AppComponent', () => {
       imports: [
         BrowserModule,
         FormsModule,
-        HttpClientModule,
+        HttpClientModule,        
+        MDBBootstrapModules.forRoot(),
       ],
       schemas: [
         NO_ERRORS_SCHEMA, 
@@ -25,9 +27,8 @@ describe('AppComponent', () => {
       ],
       providers: [
         AppService,
-        CompleterService,
-        LocalData,
-        RemoteData
+        //CompleterService,
+        //LocalData
       ]
     }).compileComponents();
   }));
