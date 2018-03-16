@@ -6,28 +6,8 @@
     </h3>
     <div class="card-body">
       <div class="md-form" >
-        <mdb-completer [placeholder]="Country" [(ngModel)]="selectedCountryName" (change)="onTextChangeCountry()" [datasource]="countryDS" [minSearchLength]="0" #item (selected)="onSelectChangeCountry($event)"></mdb-completer>              
+        <mdb-completer [placeholder]="Country" [(ngModel)]="selectedCountryName" (change)="onTextChangeCountry()" [datasource]="countryDS" [minSearchLength]="0" #item (selected)="onSelectChangeCountry($event)" mdbActive></mdb-completer>
       </div>
-
-      <label text="birthDate">Birthday doesn't display given value</label>
-      <div class="md-form">
-        <input type="date" id="birthDate1" class="form-control" [(ngModel)]="birthDate" mdbActive >
-      </div> 
-
-
-      <label text="birthDate">Birthday (datetime)</label>
-      <div class="md-form">
-        <input type="datetime" id="birthDate2" class="form-control" [(ngModel)]="birthDate" mdbActive >
-      </div> 
-
-      <label text="birthDate">Birthday picker</label>
-      <mdb-date-picker id="birthDate3" name="birthDatePicker" [options]="myDatePickerOptions"  [(ngModel)]="birthDate" mdbActive>
-      </mdb-date-picker>
-      
-      <!-- <div class="md-form">
-        <mdb-date-picker id="birthday" name="birthday" [options]="myDatePickerOptions" [(ngModel)]="birthDate"></mdb-date-picker>
-        <label [class.active]="birthday" for="birthday">Your Birthday</label>
-      </div> -->
     </div>
   </div>
 </div>
