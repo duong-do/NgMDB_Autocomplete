@@ -1,9 +1,5 @@
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
-import { AppService } from './app.service';
+import { Component, OnInit } from '@angular/core';
 import { CompleterService, CompleterData, LocalData, RemoteData } from 'ng-mdb-pro/pro/autocomplete';
 import { Class, Student } from './class.model';
 
@@ -13,23 +9,17 @@ import { Class, Student } from './class.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  private countries: any;
-  private selectedCountryName: string;
-
-  private countryDS: CompleterData;
   classDS: CompleterData;
   studentDS: CompleterData;
   inputClassName: string;
-  inputStudenName: string
+  inputStudenName: string;
   classes = new Array<Class>();
 
   constructor(
-    private completerService: CompleterService,
-    private appService: AppService) {
+    private completerService: CompleterService) {
   }
 
   ngOnInit() {
-    this.appService.getCountries().subscribe(data => this.fillCountryDS(data), error => console.log('Error :: ' + error));
     const s1 = new Student(); s1.studentName = 'Student A-1';
     const s2 = new Student(); s2.studentName = 'Student A-2';
     const studentsA = new Array<Student>(); studentsA.push(s1); studentsA.push(s2);
@@ -43,28 +33,19 @@ export class AppComponent implements OnInit {
     this.classes.push(classA); this.classes.push(classB);
 
     this.classDS = this.completerService.local(this.classes, 'className', 'className');
+    this.studentDS = this.completerService.local(new Array<Student>(), 'studentName', 'studentName');
   }
 
   onChangeClass() {
     const tmpClasses = this.classes.filter(ta => ta.className === this.inputClassName);
+    this.studentDS.cancel();
     if (tmpClasses.length === 1) {
       this.studentDS = this.completerService.local(tmpClasses[0].students, 'studentName', 'studentName');
+
+      console.log(tmpClasses[0].className);
+    } else {
+      this.studentDS = this.completerService.local(new Array<Student>(), 'studentName', 'studentName');
+      this.studentDS.subscribe();
     }
-  }
-
-  
-
-
-
-  fillCountryDS(data) {
-    this.countries = data;
-    this.countryDS = this.completerService.local(data, 'name,code', 'name');
-    this.selectedCountryName = this.countries.filter(c => c.code === 'NL')[0].name;
-  }
-
-  onTextChangeCountry() {
-  }
-
-  onSelectChangeCountry(evnt: any) {
   }
 }
