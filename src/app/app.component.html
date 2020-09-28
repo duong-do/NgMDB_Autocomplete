@@ -5,29 +5,80 @@
         <i class="fa fa-address-card"></i> <span>Persional data</span>
     </h3>
     <div class="card-body">
-      <!-- <div class="md-form" >
+      <div class="md-form" >
         <mdb-completer [placeholder]="Country" [(ngModel)]="selectedCountryName" (change)="onTextChangeCountry()" [datasource]="countryDS" [minSearchLength]="0" #item (selected)="onSelectChangeCountry($event)"></mdb-completer>              
-      </div> -->
+      </div>
 
       <label text="birthDate">Birthday doesn't display given value</label>
       <div class="md-form">
-        <input type="date" id="birthDate" class="form-control" [ngModel]="birthDate" mdbActive >
+        <input type="date" id="birthDate" class="form-control" [(ngModel)]="birthDate" mdbActive >
       </div> 
 
 
       <label text="birthDate">Birthday (datetime)</label>
       <div class="md-form">
-        <input type="datetime" id="birthDate" class="form-control" [ngModel]="birthDate" mdbActive >
+        <input type="datetime" id="birthDate" class="form-control" [(ngModel)]="birthDate" mdbActive >
       </div> 
 
       <label text="birthDate">Birthday picker</label>
-      <mdb-date-picker id="birthDatePicker" name="birthDatePicker" [options]="myDatePickerOptions"  [ngModel]="birthDate" mdbActive>
+      <mdb-date-picker id="birthDatePicker" name="birthDatePicker" [options]="myDatePickerOptions"  [(ngModel)]="birthDate" mdbActive>
       </mdb-date-picker>
       
       <!-- <div class="md-form">
         <mdb-date-picker id="birthday" name="birthday" [options]="myDatePickerOptions" [(ngModel)]="birthDate"></mdb-date-picker>
         <label [class.active]="birthday" for="birthday">Your Birthday</label>
       </div> -->
+      <div class="table-responsive">
+        <table matSort class="table table-striped table-hover" (matSortChange)="sortData($event)">
+          <thead>
+            <tr>
+              <th mat-sort-header="id">Id</th>
+              <th mat-sort-header="info.name">Name</th>
+              <th mat-sort-header="info.number">Number</th>
+              <th mat-sort-header="info.birthday">BirthDay</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of sortOrder">
+              <td>{{row.id}}</td>
+              <td>{{row.info.name}}</td>
+              <td>{{row.info.number}}</td>
+              <td>{{row.info.birthday | date:'dd-MM-yyyy'}}</td>      
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+
+  <mdb-card>
+    <mdb-card-body>
+      <form>
+        <div class="row">
+          <div class="col">
+            <div class="table-responsive">
+              <table matSort class="table table-striped table-hover" (matSortChange)="sortData($event)">
+                <thead>
+                  <tr>
+                    <th mat-sort-header="id">Id</th>
+                    <th mat-sort-header="info.name">Name</th>
+                    <th mat-sort-header="info.number">Number</th>
+                    <th mat-sort-header="info.birthday">BirthDay</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of sortOrder">
+                    <td>{{row.id}}</td>
+                    <td>{{row.info.name}}</td>
+                    <td>{{row.info.number}}</td>
+                    <td>{{row.info.birthday | date:'dd-MM-yyyy'}}</td>      
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mdb-card-body>
+  </mdb-card>
 </div>
