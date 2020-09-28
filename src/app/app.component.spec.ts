@@ -7,6 +7,7 @@ import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppService } from './app.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CompleterService, LocalData } from 'ng-mdb-pro/pro/autocomplete';
+import { MDBBootstrapModules } from 'ng-mdb-pro';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -18,9 +19,10 @@ describe('AppComponent', () => {
         BrowserModule,
         FormsModule,
         HttpClientModule,
+        MDBBootstrapModules.forRoot(),
       ],
       schemas: [
-        NO_ERRORS_SCHEMA, 
+        NO_ERRORS_SCHEMA,
         CUSTOM_ELEMENTS_SCHEMA
       ],
       providers: [
